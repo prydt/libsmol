@@ -6,5 +6,5 @@
  * Merge Sort
 
 ## To Do
-[ ] implement more algorithms / data structures
-[ ] document existing implementations
+ * implement more algorithms / data structures
+ * document existing implementations
