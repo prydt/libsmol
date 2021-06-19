@@ -47,7 +47,7 @@ END_TEST
 START_TEST(init_max_heap_test)
 {
     int len = 10;
-    max_heap *h = init_max_heap(len);
+    struct max_heap *h = init_max_heap(len);
     ck_assert_int_eq(h->len, len);
     ck_assert_int_eq(h->heap_size, len);
     ck_assert_ptr_nonnull(h->keys);
@@ -58,7 +58,7 @@ END_TEST
 START_TEST(build_max_heap_test)
 {
     int len = 10;
-    max_heap *h = init_max_heap(len);
+    struct max_heap *h = init_max_heap(len);
     h->keys[0] = 2;
     h->keys[1] = 3;
     h->keys[2] = 1;
@@ -89,7 +89,7 @@ END_TEST
 START_TEST(heapsort_test)
 {
     int len = 10;
-    max_heap *h = init_max_heap(len);
+    struct max_heap *h = init_max_heap(len);
     h->keys[0] = 2;
     h->keys[1] = 3;
     h->keys[2] = 1;

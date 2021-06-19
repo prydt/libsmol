@@ -1,68 +1,68 @@
 #include "heap.h"
 #include <stdlib.h> /* for malloc and free */
 
-int heap_right(int i)
+size_t heap_right(size_t i)
 {
     return (2*i)+1;
 }
 
-int heap_left(int i)
+size_t heap_left(size_t i)
 {
     return (2*i)+2;
 }
 
-int heap_parent(int i)
+size_t heap_parent(size_t i)
 {
     return (i-1)/2;
 }
 
-max_heap * init_max_heap(int len)
+struct max_heap * init_max_heap(size_t len)
 {
-    max_heap *h = (max_heap*) malloc(sizeof(max_heap));
-    h->keys = (int*) malloc(sizeof(int) * len);
+    struct max_heap *h = malloc(sizeof *h);
+    h->keys = malloc(sizeof(int) * len);
     h->len = len;
     h->heap_size = len;
     return h;
 }
 
-void free_max_heap(max_heap *h)
+void free_max_heap(struct max_heap *h)
 {
     free(h->keys);
     free(h);
 }
 
 
-void build_max_heap(max_heap *h)
+void build_max_heap(struct max_heap *h)
 {
     for (int i = h->len / 2; i >= 0; i--)
         max_heapify(h, i);
 }
 
-void max_heapify(max_heap *h, int index)
+void max_heapify(struct max_heap *h, size_t i)
 {
-    int l = heap_left(index);
-    int r = heap_right(index);
+    int l = heap_left(i);
+    int r = heap_right(i);
     int largest;
 
-    if (l < h->heap_size && h->keys[l] > h->keys[index])
+    if (l < h->heap_size && h->keys[l] > h->keys[i])
         largest = l;
     else
-        largest = index;
+        largest = i;
 
     if (r < h->heap_size && h->keys[r] > h->keys[largest])
         largest = r;
 
-    if (largest != index)
+    if (largest != i)
     {
-        int t = h->keys[index];
-        h->keys[index] = h->keys[largest];
+        int t = h->keys[i];
+        h->keys[i] = h->keys[largest];
         h->keys[largest] = t;
 
         max_heapify(h, largest);
     }
 }
 
-void heapsort(max_heap *h)
+void heapsort(struct max_heap *h)
 {
     build_max_heap(h);
     for (int i = h->len - 1; i > 0; i--)
