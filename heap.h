@@ -29,7 +29,6 @@ size_t heap_left(size_t i);
  * heap_parent(int i)
  *  - returns index of the parent of the node at index i
  */
-
 size_t heap_parent(size_t i);
 
 /*

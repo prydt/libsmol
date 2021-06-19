@@ -40,9 +40,9 @@ void build_max_heap(struct max_heap *h)
 
 void max_heapify(struct max_heap *h, size_t i)
 {
-    int l = heap_left(i);
-    int r = heap_right(i);
-    int largest;
+    size_t l = heap_left(i),
+           r = heap_right(i),
+           largest;
 
     if (l < h->heap_size && h->keys[l] > h->keys[i])
         largest = l;
