@@ -4,6 +4,7 @@
 ## Implemented
  * Insertion Sort
  * Merge Sort
+ * Max Heap / Heapsort
 
 ## To Do
  * implement more algorithms / data structures
