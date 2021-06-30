@@ -22,8 +22,15 @@ void insertion_sort(int *A, int len);
 void merge_sort(int *A, int len);
 
 /*
- * TODO write this comment
+ * quick_sort(int *A, int len)
+ *  - perform quick sort on an array A of length len
  *
+ * asymptotic complexity:
+ *  - worst case performance is O(n^2) but this is
+ *    exceptionally uncommon
+ *  - average case performance is O(n lg n) which is
+ *    which important given the use of a randomized
+ *    paritioning subroutine
  */
 void quick_sort(int *A, int len);
 
