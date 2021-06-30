@@ -1,5 +1,5 @@
-#ifndef SORT
-#define SORT
+#ifndef SORT_H
+#define SORT_H
 
 /*
  * insertion_sort(int *A, int len)
@@ -20,5 +20,11 @@ void insertion_sort(int *A, int len);
  *
  */
 void merge_sort(int *A, int len);
+
+/*
+ * TODO write this comment
+ *
+ */
+void quick_sort(int *A, int len);
 
 #endif
