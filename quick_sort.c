@@ -1,51 +1,50 @@
-#include <stdlib.h>
-#include <stdio.h>
+#include <stdlib.h> /* for size_t and rand() */
 
-size_t partition(int *A, size_t p, size_t r)
+size_t partition(int *A, size_t low, size_t high)
 {
-    // TODO implement a better pseudo rng
-    size_t rnd = p + (rand() % (r - p + 1));
-    int t = A[r];
-    A[r] = A[rnd];
-    A[rnd] = t;
+    size_t rnd = low + (rand() % (high - low + 1));
+    int temp = A[high];
+    A[high] = A[rnd];
+    A[rnd] = temp;
 
-    int pivot = A[r];
-    size_t i = p;
-    for (int j = p; j < r; j++)
+    int pivot = A[high];
+    size_t less_index = low;
+    for (int i = low; i < high; i++)
     {
-        if (A[j] < pivot)
+        if (A[i] < pivot)
         {
-            t = A[i];
-            A[i] = A[j];
-            A[j] = t;
+            temp = A[less_index];
+            A[less_index] = A[i];
+            A[i] = temp;
 
-            i++;
+            less_index++;
         }
     }
 
-    t = A[i];
-    A[i] = A[r];
-    A[r] = t;
+    temp = A[less_index];
+    A[less_index] = A[high];
+    A[high] = temp;
 
-    return i;
+    return less_index;
 }
 
-void quick_sort_r(int *A, size_t p, size_t r)
+void quick_sort_r(int *A, size_t low, size_t high)
 {
-    if (p < r)
+    if (low < high)
     {
-        size_t q = partition(A, p, r);
+        int pivot = partition(A, low, high);
 
-        /* casting to int because comparing a size_t and int
-           causes the int to be converted into a size_t making
-           making it the absolute value of what it used to be
-           and in general this just causes a headache */
-
-        if ((int)p < ((int)q) - 1)
-            quick_sort_r(A, p, q - 1);
-
-        if ((int)q + 1 < (int)r)
-            quick_sort_r(A, q + 1, r);
+        /*
+         * casting low and high to ints for proper comparisons
+         *
+         * comparing an int to a size_t has caused issues since
+         * the int is converted to a size_t, making negative values
+         * positive instead and causing quite the headache
+         */
+        if ((int)low < pivot - 1)
+            quick_sort_r(A, low, pivot - 1);
+        if (pivot + 1 < (int)high)
+            quick_sort_r(A, pivot + 1, high);
     }
 }
 
@@ -53,4 +52,3 @@ void quick_sort(int *A, size_t len)
 {
     quick_sort_r(A, 0, len - 1);
 }
-

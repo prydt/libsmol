@@ -4,6 +4,7 @@
 ## Implemented
  * Insertion Sort
  * Merge Sort
+ * Quick Sort
  * Max Heap / Heapsort
 
 ## To Do
